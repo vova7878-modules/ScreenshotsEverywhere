@@ -45,7 +45,7 @@ zygisk {
     description = "Allows you to take screenshots wherever you want"
     entrypoint = "com.v7878.hooks.screenshotseverywhere.Main"
     archiveName = "ScreenshotsEverywhere"
-    //updateJson = "https://raw.githubusercontent.com/***/update.json"
+    updateJson = "https://raw.githubusercontent.com/vova7878-modules/ScreenshotsEverywhere/main/updates/update.json"
 }
 
 dependencies {
