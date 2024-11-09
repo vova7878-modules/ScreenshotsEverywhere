@@ -1,0 +1,54 @@
+import com.github.kr328.gradle.zygote.ZygoteLoader
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.java.zygisk)
+}
+
+android {
+    namespace 'com.v7878.hooks.screenshotseverywhere'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 34
+        targetSdk 35
+        versionCode 1_000_000
+        versionName "v1.0.0"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+zygisk {
+    packages(ZygoteLoader.PACKAGE_SYSTEM_SERVER)
+
+    id = "com_v7878_screenshotseverywhere"
+    name = "ScreenshotsEverywhere"
+    author = "v7878"
+    description = "Allows you to take screenshots wherever you want"
+    entrypoint = "com.v7878.hooks.screenshotseverywhere.Main"
+    archiveName = "ScreenshotsEverywhere"
+    //updateJson = "https://raw.githubusercontent.com/***/update.json"
+}
+
+dependencies {
+    implementation libs.androidvmtools
+    implementation libs.r8.annotations
+}
