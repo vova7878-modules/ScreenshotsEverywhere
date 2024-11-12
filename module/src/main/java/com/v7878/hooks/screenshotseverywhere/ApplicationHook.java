@@ -4,8 +4,8 @@ import static com.v7878.hooks.screenshotseverywhere.Main.TAG;
 
 import android.util.Log;
 
-import com.github.kr328.zloader.ZygoteLoader;
 import com.v7878.r8.annotations.DoNotShrink;
+import com.v7878.zygisk.ZygoteLoader;
 
 public class ApplicationHook {
     private static void unknown_package(String package_name) {

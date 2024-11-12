@@ -2,11 +2,11 @@ package com.v7878.hooks.screenshotseverywhere;
 
 import android.util.Log;
 
-import com.github.kr328.zloader.ZygoteLoader;
 import com.v7878.r8.annotations.DoNotObfuscate;
 import com.v7878.r8.annotations.DoNotObfuscateType;
 import com.v7878.r8.annotations.DoNotShrink;
 import com.v7878.r8.annotations.DoNotShrinkType;
+import com.v7878.zygisk.ZygoteLoader;
 
 @DoNotObfuscateType
 @DoNotShrinkType
