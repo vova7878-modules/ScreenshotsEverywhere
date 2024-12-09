@@ -18,7 +18,11 @@ public class Main {
     @DoNotObfuscate
     public static void main() throws Throwable {
         Log.w(TAG, "Injected into " + ZygoteLoader.getPackageName());
-        LoadedApkHook.init();
+        try {
+            MethodAndArgsCallerHook.init();
+        } catch (Throwable th) {
+            Log.e(TAG, "Exception", th);
+        }
         Log.w(TAG, "Done");
     }
 }

@@ -37,7 +37,7 @@ public class DevicePolicyManagerServiceHook {
             Hooks.hook(target, hooker, EntryPointType.DIRECT);
         }
 
-        Log.w(TAG, "WindowStateHook");
+        Log.w(TAG, "DevicePolicyManagerServiceHook");
     }
 
     @SuppressWarnings("unused")
