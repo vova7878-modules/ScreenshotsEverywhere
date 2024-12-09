@@ -9,4 +9,5 @@
 </div>
 
 ### Technical requirements:
+
 - Android 14-15 and any of the Zygisk options for Magisk / APatch / KernelSU

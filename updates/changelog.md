@@ -1,1 +1,1 @@
-- First release
+- Fix injection in system_server for some devices
