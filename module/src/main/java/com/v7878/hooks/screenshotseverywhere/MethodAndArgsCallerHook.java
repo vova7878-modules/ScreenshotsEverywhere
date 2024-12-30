@@ -12,7 +12,6 @@ import com.v7878.unsafe.invoke.EmulatedStackFrame;
 import com.v7878.unsafe.invoke.Transformers;
 import com.v7878.vmtools.Hooks;
 import com.v7878.vmtools.Hooks.EntryPointType;
-import com.v7878.zygisk.ZygoteLoader;
 
 @SuppressLint("PrivateApi")
 public class MethodAndArgsCallerHook {
@@ -23,7 +22,7 @@ public class MethodAndArgsCallerHook {
         var accessor = frame.accessor();
         if (SYSTEM_SERVER.equals(accessor.getReference(0))) {
             ClassLoader loader = accessor.getReference(2);
-            ApplicationHook.init(ZygoteLoader.PACKAGE_SYSTEM_SERVER, loader);
+            SystemServerHook.init(loader);
         }
     }
 
