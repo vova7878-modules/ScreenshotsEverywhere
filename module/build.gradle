@@ -12,8 +12,8 @@ android {
     defaultConfig {
         minSdk 26
         targetSdk 35
-        versionCode 1_000_001
-        versionName "v1.0.1"
+        versionCode 1_000_002
+        versionName "v1.0.2"
     }
 
     buildTypes {
@@ -42,7 +42,7 @@ zygisk {
     id = "com_v7878_screenshotseverywhere"
     name = "ScreenshotsEverywhere"
     author = "v7878"
-    description = "Allows you to take screenshots wherever you want"
+    description = "Allows you to take screenshots and record your screen wherever you want"
     entrypoint = "com.v7878.hooks.screenshotseverywhere.Main"
     archiveName = "ScreenshotsEverywhere"
     updateJson = "https://raw.githubusercontent.com/vova7878-modules/ScreenshotsEverywhere/main/updates/update.json"

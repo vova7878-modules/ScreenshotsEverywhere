@@ -1,1 +1,3 @@
-- Fix injection in system_server for some devices
+- Added support for devices with Android 8+
+- Added support for devices with Miui/Hyper OS
+- Fixes for 32-bit arm devices
