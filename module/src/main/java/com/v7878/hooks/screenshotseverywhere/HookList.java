@@ -12,6 +12,8 @@ public class HookList {
         hooks.add(HTF.NOP, "com.android.server.devicepolicy.DevicePolicyManagerService", "setScreenCaptureDisabled", "void", "android.content.ComponentName", "boolean");
         hooks.add(HTF.NOP, "com.android.server.devicepolicy.DevicePolicyManagerService", "setScreenCaptureDisabled", "void", "int");
 
+        hooks.add(HTF.TRUE, "com.android.server.devicepolicy.DevicePolicyCacheImpl", "isScreenCaptureAllowed", "boolean", "int");
+
         hooks.add(HTF.FALSE, "com.android.server.wm.WindowState", "isSecureLocked", "boolean");
         hooks.add(HTF.FALSE, "com.android.server.wm.WindowManagerService", "isSecureLocked", "boolean", "com.android.server.wm.WindowState");
 
@@ -20,5 +22,7 @@ public class HookList {
         hooks.add(HTF.NOP, "com.android.server.wm.WindowSurfaceController", "setSecure", "void", "boolean");
 
         hooks.add(HTF.return_constant(Collections.emptyList()), "com.android.server.wm.WindowManagerService", "notifyScreenshotListeners", "java.util.List", "int");
+
+        hooks.add(HTF.FALSE, "com.android.server.wm.WindowManagerServiceImpl", "notAllowCaptureDisplay", "boolean", "com.android.server.wm.RootWindowContainer", "int");
     }
 }
