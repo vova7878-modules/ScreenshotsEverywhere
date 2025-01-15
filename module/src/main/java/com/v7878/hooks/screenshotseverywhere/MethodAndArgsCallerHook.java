@@ -18,11 +18,17 @@ public class MethodAndArgsCallerHook {
     private static final String SYSTEM_SERVER = "com.android.server.SystemServer";
     private static final String RUNTIME_INIT = "com.android.internal.os.RuntimeInit";
 
+    //TODO
+    private static volatile boolean started = false;
+
     private static void checkSystemServer(EmulatedStackFrame frame) throws Throwable {
-        var accessor = frame.accessor();
-        if (SYSTEM_SERVER.equals(accessor.getReference(0))) {
-            ClassLoader loader = accessor.getReference(2);
-            SystemServerHook.init(loader);
+        if (!started) {
+            var accessor = frame.accessor();
+            if (SYSTEM_SERVER.equals(accessor.getReference(0))) {
+                started = true;
+                ClassLoader loader = accessor.getReference(2);
+                SystemServerHook.init(loader);
+            }
         }
     }
 
