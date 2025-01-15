@@ -16,6 +16,10 @@ android {
         versionName "v1.0.2"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             debuggable false

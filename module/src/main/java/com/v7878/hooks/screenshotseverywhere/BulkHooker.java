@@ -9,29 +9,30 @@ import com.v7878.vmtools.Hooks;
 import com.v7878.vmtools.Hooks.HookTransformer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class BulkHooker {
-    public record HookElement(
-            HookTransformer impl, String method, String ret, String... args) {
+    public record HookElement(HookTransformer impl, String pattern) {
     }
 
     private final Map<String, List<HookElement>> hooks = new HashMap<>();
 
-    public void add(HookTransformer impl, String clazz, String method, String ret, String... args) {
+    public void addPattern(HookTransformer impl, String clazz, String pattern) {
         hooks.computeIfAbsent(clazz, unused -> new ArrayList<>())
-                .add(new HookElement(impl, method, ret, args));
+                .add(new HookElement(impl, pattern));
     }
 
-    private static String toString(String clazz, HookElement element) {
-        var args = element.args();
-        return element.ret() + " " + clazz + "." + element.method() +
-                ((args == null || args.length == 0) ? "()" : Arrays.stream(args)
-                        .collect(Collectors.joining(",", "(", ")")));
+    public void addAll(HookTransformer impl, String clazz, String method_name) {
+        addPattern(impl, clazz, String.format("%s\\(.*\\).*", Pattern.quote(method_name)));
+    }
+
+    public void addExact(HookTransformer impl, String clazz, String method_name, String ret, String... args) {
+        addPattern(impl, clazz, String.format("%s\\(%s\\)%s", Pattern.quote(method_name),
+                Pattern.quote(String.join(", ", args)), Pattern.quote(ret)));
     }
 
     public void apply(ClassLoader loader) {
@@ -45,15 +46,15 @@ public class BulkHooker {
             }
             var executables = getDeclaredExecutables(clazz);
             for (var element : entry.getValue()) {
-                var executable = Utils.searchExecutable(executables,
-                        element.method(), element.ret(), element.args());
-                if (executable != null) {
-                    Hooks.hook(executable, Hooks.EntryPointType.DIRECT,
-                            element.impl(), Hooks.EntryPointType.DIRECT);
-                } else {
-                    Log.e(TAG, String.format("Method %s not found",
-                            toString(entry.getKey(), element)));
-                }
+                Stream.of(executables)
+                        .filter(Utils.filter(element.pattern()))
+                        .forEach(executable -> {
+                            if (BuildConfig.DEBUG) {
+                                Log.i(TAG, "Hooked: " + executable);
+                            }
+                            Hooks.hook(executable, Hooks.EntryPointType.DIRECT,
+                                    element.impl(), Hooks.EntryPointType.DIRECT);
+                        });
             }
         }
     }
