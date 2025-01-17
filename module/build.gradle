@@ -12,8 +12,8 @@ android {
     defaultConfig {
         minSdk 26
         targetSdk 35
-        versionCode 1_000_002
-        versionName "v1.0.2"
+        versionCode 1_000_003
+        versionName "v1.0.3"
     }
 
     buildFeatures {
