@@ -10,4 +10,4 @@
 
 ### Technical requirements:
 
-- Android 8-15 and any of the Zygisk options for Magisk / APatch / KernelSU
+- Android 8-16 and any of the Zygisk options for Magisk / APatch / KernelSU

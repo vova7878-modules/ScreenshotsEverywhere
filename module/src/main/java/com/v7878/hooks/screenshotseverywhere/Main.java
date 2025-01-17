@@ -17,12 +17,12 @@ public class Main {
     @DoNotShrink
     @DoNotObfuscate
     public static void main() throws Throwable {
-        Log.w(TAG, "Injected into " + ZygoteLoader.getPackageName());
+        Log.i(TAG, "Injected into " + ZygoteLoader.getPackageName());
         try {
             MethodAndArgsCallerHook.init();
         } catch (Throwable th) {
             Log.e(TAG, "Exception", th);
         }
-        Log.w(TAG, "Done");
+        Log.i(TAG, "Done");
     }
 }
