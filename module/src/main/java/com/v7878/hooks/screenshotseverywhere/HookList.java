@@ -6,7 +6,12 @@ import android.os.Build;
 public class HookList {
     
     public static boolean isOnePlus() {
-        return "OnePlus".equalsIgnoreCase(Build.BRAND);
+        String manufacturer = Build.MANUFACTURER != null ? Build.MANUFACTURER.toLowerCase() : "";
+        String brand = Build.BRAND != null ? Build.BRAND.toLowerCase() : "";
+        String fingerprint = Build.FINGERPRINT != null ? Build.FINGERPRINT.toLowerCase() : "";
+        return manufacturer.contains("oneplus") ||
+           brand.contains("oneplus") ||
+           fingerprint.contains("oneplus");
     }
     
     public static void init(BulkHooker hooks, boolean system_server) {
