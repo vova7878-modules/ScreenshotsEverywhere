@@ -15,14 +15,10 @@ public class HookList {
         hooks.addExact(HTF.TRUE, "com.android.server.devicepolicy.DevicePolicyCacheImpl", "isScreenCaptureAllowed", "boolean", "int");
 
         hooks.addExact(HTF.FALSE, "com.android.server.wm.WindowState", "isSecureLocked", "boolean");
-        hooks.addExact(HTF.FALSE, "com.android.server.wm.WindowManagerService", "isSecureLocked", "boolean", "com.android.server.wm.WindowState");
 
         hooks.addExact(HTF.NOP, "com.android.server.wm.WindowState", "setSecureLocked", "void", "boolean");
         hooks.addExact(HTF.NOP, "com.android.server.wm.WindowStateAnimator", "setSecureLocked", "void", "boolean");
         hooks.addExact(HTF.NOP, "com.android.server.wm.WindowSurfaceController", "setSecure", "void", "boolean");
 
-        hooks.addExact(HTF.constant(Collections.emptyList()), "com.android.server.wm.WindowManagerService", "notifyScreenshotListeners", "java.util.List", "int");
-
-        hooks.addExact(HTF.FALSE, "com.android.server.wm.WindowManagerServiceImpl", "notAllowCaptureDisplay", "boolean", "com.android.server.wm.RootWindowContainer", "int");
     }
 }
